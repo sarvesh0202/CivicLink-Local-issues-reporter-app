@@ -22,11 +22,12 @@ const Home = () => {
   const fetchData = async () => {
     try {
       const [issuesRes, statsRes] = await Promise.all([
-        api.get('/issues?sortBy=newest'),
-        api.get('/users/leaderboard')
+        api.get('api/issues?sortBy=newest'),
+        api.get('api/users/leaderboard')
       ]);
 
       const issues = issuesRes.data;
+      console.log(issues);
       setRecentIssues(issues.slice(0, 6));
 
       // Calculate stats
@@ -50,7 +51,7 @@ const Home = () => {
     if (!user) return;
 
     try {
-      await api.post(`/issues/${issueId}/upvote`);
+      await api.post(`api/issues/${issueId}/upvote`);
       fetchData(); // Refresh data
     } catch (error) {
       console.error('Error upvoting issue:', error);
@@ -59,7 +60,7 @@ const Home = () => {
   //NEW: Handle issue resolution
   const handleResolve = async (issueId, formData) => {
     try {
-      await api.post(`/issues/${issueId}/resolve`, formData, {
+      await api.post(`api/issues/${issueId}/resolve`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' }
       });
       fetchData(); // Refresh data

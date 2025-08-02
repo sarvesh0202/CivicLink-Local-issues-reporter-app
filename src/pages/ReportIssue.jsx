@@ -130,7 +130,7 @@ const ReportIssue = () => {
       submitData.append('address', formData.address);
       submitData.append('image', image);
 
-      await api.post('/issues', submitData, {
+      await api.post('api/issues/', submitData, {
         headers: { 'Content-Type': 'multipart/form-data' }
       });
 

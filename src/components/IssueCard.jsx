@@ -91,6 +91,7 @@ import React from 'react';
 import { Heart, MapPin, Clock, User, CheckCircle, Upload } from 'lucide-react';
 import { formatDistanceToNow } from 'date-fns';
 
+
 //NEW: Add onResolve prop for handling issue resolution
 const IssueCard = ({ issue, onUpvote, onResolve, currentUser, showDistance = false }) => {
   const [showResolveForm, setShowResolveForm] = React.useState(false);
@@ -154,7 +155,7 @@ const IssueCard = ({ issue, onUpvote, onResolve, currentUser, showDistance = fal
     <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
       <div className="relative">
         <img 
-          src={`http://localhost:5000${issue.imageUrl}`} 
+          src={`${import.meta.env.VITE_API_BASE_URL.replace(/\/$/, '')}${issue.imageUrl}`}
           alt={issue.title}
           className="w-full h-48 object-cover"
         />
@@ -200,7 +201,7 @@ const IssueCard = ({ issue, onUpvote, onResolve, currentUser, showDistance = fal
             </div>
             {issue.resolvedProof.imageUrl && (
               <img
-                src={`http://localhost:5000${issue.resolvedProof.imageUrl}`}
+                src={`${import.meta.env.VITE_API_BASE_URL.replace(/\/$/, '')}${issue.imageUrl}`}
                 alt="Resolution proof"
                 className="w-full h-32 object-cover rounded-md mb-2"
               />

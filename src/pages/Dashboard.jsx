@@ -22,8 +22,8 @@ const Dashboard = () => {
   const fetchUserData = async () => {
     try {
       const [statsRes, issuesRes] = await Promise.all([
-        api.get('/users/stats'),
-        api.get('/issues')
+        api.get('api/users/stats'),
+        api.get('api/issues')
       ]);
 
       setStats(statsRes.data.stats);
@@ -40,7 +40,7 @@ const Dashboard = () => {
 
   const handleUpvote = async (issueId) => {
     try {
-      await api.post(`/issues/${issueId}/upvote`);
+      await api.post(`api/issues/${issueId}/upvote`);
       fetchUserData(); // Refresh data
     } catch (error) {
       console.error('Error upvoting issue:', error);
@@ -60,7 +60,7 @@ const Dashboard = () => {
    //NEW: Handle issue resolution
   const handleResolve = async (issueId, formData) => {
     try {
-      await api.post(`/issues/${issueId}/resolve`, formData, {
+      await api.post(`api/issues/${issueId}/resolve`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' }
       });
       fetchUserData(); // Refresh data

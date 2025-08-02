@@ -382,7 +382,7 @@ const MapView = () => {
 
   const fetchIssues = async () => {
     try {
-      const response = await api.get('/issues');
+      const response = await api.get('api/issues');
       setIssues(response.data);
     } catch (error) {
       console.error('Error fetching issues:', error);
@@ -435,7 +435,7 @@ const MapView = () => {
     if (!user) return;
 
     try {
-      await api.post(`/issues/${issueId}/upvote`);
+      await api.post(`api/issues/${issueId}/upvote`);
       fetchIssues();
     } catch (error) {
       console.error('Error upvoting issue:', error);
@@ -445,7 +445,7 @@ const MapView = () => {
   //NEW: Handle issue resolution
   const handleResolve = async (issueId, formData) => {
     try {
-      await api.post(`/issues/${issueId}/resolve`, formData, {
+      await api.post(`api/issues/${issueId}/resolve`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' }
       });
       fetchIssues(); // Refresh data
@@ -562,7 +562,7 @@ const MapView = () => {
                     <Popup>
                       <div className="w-64">
                         <img
-                          src={`http://localhost:5000${issue.imageUrl}`}
+                          src={`${import.meta.env.VITE_API_BASE_URL}/api/${issues.imageUrl}`}
                           alt={issue.title}
                           className="w-full h-32 object-cover rounded-md mb-2"
                         />
