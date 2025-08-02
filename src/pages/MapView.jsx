@@ -562,7 +562,7 @@ const MapView = () => {
                     <Popup>
                       <div className="w-64">
                         <img
-                          src={`${import.meta.env.VITE_API_BASE_URL}/api/${issues.imageUrl}`}
+                          src={`${import.meta.env.VITE_API_BASE_URL.replace(/\/$/, '')}${issue.imageUrl}`}
                           alt={issue.title}
                           className="w-full h-32 object-cover rounded-md mb-2"
                         />
